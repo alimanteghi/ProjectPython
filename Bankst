@@ -1,0 +1,43 @@
+import csv
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+
+def calculate_income_and_expenses(csv_file):
+    total_income = 0
+    total_expenses = 0
+
+    with open(csv_file, 'r') as file:
+        reader = csv.reader(file)
+        next(reader)  
+
+        for row in reader:
+            amount = float(row[4]) 
+            if amount > 0:
+                total_income += amount
+            else:
+                total_expenses += amount
+
+    return total_income, total_expenses
+
+
+csv_file = 'bank_transactions.csv'  
+
+income, expenses = calculate_income_and_expenses(csv_file)
+
+print(f"Total Income: {income}")
+print(f"Total Expenses: {expenses}")
+
+totalin=750
+totalout=1300
+countin = 1
+bw = 0.2
+
+index = np.arange(countin)
+l1= plt.bar(index+0.1,totalin ,bw, 0.5,alpha=0.4,label="income")
+l2 = plt.bar(index+0.2,totalout,bw , 0.5 ,alpha=0.4 ,label="spent")
+
+plt.ylabel("Pond")
+plt.xlabel("Income&Spent")
+plt.show()
